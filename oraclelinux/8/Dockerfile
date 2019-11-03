@@ -21,7 +21,7 @@ RUN \
       systemd-logind.service getty.service getty.target; \
     yum -y upgrade; \
     rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm; \
-    yum -y install git sudo ansible libselinux-python3 iproute python3-netaddr; \
+    yum -y install git tar sudo ansible libselinux-python3 iproute python3-netaddr; \
     yum clean all; \
     sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
     echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts; \
