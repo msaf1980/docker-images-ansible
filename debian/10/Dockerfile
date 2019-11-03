@@ -2,6 +2,9 @@
 FROM debian:buster
 MAINTAINER Bert Van Vreckem <bert.vanvreckem@gmail.com>
 
+# /bin is not a symlink to /usr/bin in docker rootfs
+# Add a fix: ln -s /usr/bin/kill /bin/kill
+
 # Install Ansible
 RUN \
     (cd /lib/systemd/system/sysinit.target.wants/ || exit; for i in *; do [ "$i" = systemd-tmpfiles-setup.service ] || rm -f "$i"; done); \
@@ -12,15 +15,14 @@ RUN \
     rm -f /lib/systemd/system/sockets.target.wants/*initctl*; \
     rm -f /lib/systemd/system/basic.target.wants/*; \
     rm -f /lib/systemd/system/anaconda.target.wants/*; \
+    ln -s /usr/bin/kill /bin/kill ; \
     systemctl mask dev-mqueue.mount dev-hugepages.mount \
       systemd-remount-fs.service sys-kernel-config.mount \
       sys-kernel-debug.mount sys-fs-fuse-connections.mount \
       systemd-logind.service getty.service getty.target; \
     apt update; \
     apt install -y software-properties-common git systemd-sysv; \
-    echo 'deb http://http.debian.net/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list; \
-    apt update; \
-    apt -t stretch-backports install -y ansible python-netaddr; \
+    apt install -y ansible python-netaddr; \
     rm -rf /var/lib/apt/lists/*; \
     rm -Rf /usr/share/doc && rm -Rf /usr/share/man; \
     apt clean
