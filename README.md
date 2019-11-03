@@ -9,6 +9,11 @@ Available images:
 - CentOS
     - 6: `bertvv/ansible-testing:centos_6` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:centos_6.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
     - 7: `bertvv/ansible-testing:centos_7` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:centos_7.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
+    - 8: `bertvv/ansible-testing:centos_8` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:centos_7.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
+- OracleLinux
+    - 6: `bertvv/ansible-testing:oraclelinux_6` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:centos_6.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
+    - 7: `bertvv/ansible-testing:oraclelinux_7` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:centos_7.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
+    - 8: `bertvv/ansible-testing:oraclelinux_8` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:centos_7.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")    
 - Fedora:
     - 28: `bertvv/ansible-testing:fedora_28` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:fedora_28.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
     - 29: `bertvv/ansible-testing:fedora_29` [![](https://images.microbadger.com/badges/image/bertvv/ansible-testing:fedora_29.svg)](https://microbadger.com/images/bertvv/ansible-testing "Get your own image badge on microbadger.com")
