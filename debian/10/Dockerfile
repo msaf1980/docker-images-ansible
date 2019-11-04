@@ -20,7 +20,8 @@ RUN \
       systemd-logind.service getty.service getty.target; \
     apt update; \
     apt install -y software-properties-common git systemd-sysv; \
-    apt install -y ansible python-netaddr; \
+    apt install -y ansible python-netaddr python-pip; \
+    pip install yamllint ansible-lint; \
     rm -rf /var/lib/apt/lists/*; \
     rm -Rf /usr/share/doc && rm -Rf /usr/share/man; \
     apt clean

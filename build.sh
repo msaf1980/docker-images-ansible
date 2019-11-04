@@ -9,6 +9,10 @@
 #/ EXAMPLES
 #/  ./build.sh
 #/     prints this help message
+#/  ./build.sh [options] images
+#/  Optionns:
+#/    --push Push after successful build
+#/    --push-only Push builded images
 #/  ./build.sh centos/7/
 #/     builds the Docker image for CentOS 7
 #/  ./build.sh fedora/*
@@ -17,17 +21,17 @@
 #/     builds all available images
 
 
-#{{{ Bash settings
+# Bash settings
 # abort on nonzero exitstatus
 set -o errexit
 # abort on unbound variable
 set -o nounset
 # don't hide errors within pipes
 set -o pipefail
-#}}}
-#{{{ Variables
-readonly script_name=$(basename "${0}")
-readonly script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
+
+# Variables
+readonly script_name="${0}"
+#readonly script_dir=$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )
 IFS=$'\t\n'   # Split on newlines and tabs (but not on spaces)
 
 # Color definitions
@@ -38,18 +42,26 @@ readonly yellow='\e[0;33m'
 # Debug info ('on' to enable)
 readonly debug='on'
 
+push=0
+
 readonly logfile='build.log'
 
-#}}}
-
 main() {
+  [ "$1" == "--push" ] && {
+    push="1"
+    shift
+  }
+  [ "$1" == "--push-only" ] && {
+    push="2"
+    shift
+  }
   check_args "${@}"
   truncate_log
   build_images "${@}"
 
 }
 
-#{{{ Helper functions
+# Helper functions
 
 build_images() {
   if [ "${1}" = "all" ]; then
@@ -68,12 +80,18 @@ build_image() {
   local distribution="${image%%/*}"
   local version="${image##*/}"
 
+  [ "${push}" -le "1" ] && {
   info "Building ${image}, distro ${distribution}, version ${version}"
 
   docker build \
-    --tag="ansible-testing:${distribution}_${version}" \
+    --tag="msaf1980/ansible-testing:${distribution}_${version}" \
     "${image}" | tee --append "${logfile}"
+  }
+  [ "${push}" -ge "1" ] && {
+  info "Push ${image}, distro ${distribution}, version ${version}"
 
+  docker push msaf1980/ansible-testing:${distribution}_${version} | tee --append "${logfile}"
+  }
 }
 
 truncate_log() {
@@ -113,10 +131,7 @@ error() {
 
 # Print usage message on stdout by parsing start of script comments
 usage() {
-  grep '^#/' "${script_dir}/${script_name}" | sed 's/^#\/\w*//'
+  grep '^#/' "${script_name}" | sed 's/^#\/\w*//'
 }
 
-#}}}
-
 main "${@}"
-

@@ -18,7 +18,8 @@ RUN \
       systemd-logind.service getty.service getty.target; \
     yum -y upgrade; \
     yum -y install epel-release; \
-    yum -y install git ansible sudo libselinux-python iproute python-netaddr; \
+    yum -y install git ansible sudo libselinux-python iproute python-netaddr python-pip; \
+    pip install yamllint ansible-lint; \
     yum clean all; \
     sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
     echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts; \

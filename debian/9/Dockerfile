@@ -20,7 +20,8 @@ RUN \
     apt install -y software-properties-common git systemd-sysv; \
     echo 'deb http://http.debian.net/debian stretch-backports main' > /etc/apt/sources.list.d/backports.list; \
     apt update; \
-    apt -t stretch-backports install -y ansible python-netaddr; \
+    apt -t stretch-backports install -y ansible python-netaddr python-pip; \
+    pip install yamllint ansible-lint; \
     rm -rf /var/lib/apt/lists/*; \
     rm -Rf /usr/share/doc && rm -Rf /usr/share/man; \
     apt clean

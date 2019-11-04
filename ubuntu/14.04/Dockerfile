@@ -7,7 +7,8 @@ RUN apt-get update; \
     apt-get install -y software-properties-common git; \
     apt-add-repository -y ppa:ansible/ansible; \
     apt-get update; \
-    apt-get install -y ansible python-netaddr; \
+    apt-get install -y ansible python-netaddr python-pip; \
+    pip install yamllint; \
     echo "[local]\nlocalhost ansible_connection=local" > /etc/ansible/hosts; \
     echo "[defaults]\nretry_files_enabled = False" > /etc/ansible/ansible.cfg
 

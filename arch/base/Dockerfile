@@ -30,7 +30,8 @@ RUN \
       sys-kernel-debug.mount sys-fs-fuse-connections.mount \
       systemd-logind.service getty.service getty.target; \
   pacman --noconfirm --sync --refresh --sysupgrade; \
-  pacman --noconfirm --sync --refresh iproute2 ansible python-netaddr; \
+  pacman --noconfirm --sync --refresh iproute2 ansible python-netaddr python-pip; \
+  pip install yamllint ansible-lint; \
   printf "[local]\nlocalhost ansible_connection=local\n" > /etc/ansible/hosts; \
   printf "[defaults]\nretry_files_enabled = False\nstdout_callback = yaml" > /etc/ansible/ansible.cfg
 

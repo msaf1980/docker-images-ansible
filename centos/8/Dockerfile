@@ -18,8 +18,9 @@ RUN \
       systemd-logind.service getty.service getty.target; \
     yum -y upgrade; \
     yum -y install epel-release; \
-    yum -y install git sudo ansible libselinux-python3 iproute python3-netaddr; \
+    yum -y install git sudo ansible libselinux-python3 iproute python3-netaddr python3-pip; \
     yum clean all; \
+    pip3 install yamllint ansible-lint; \
     sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
     echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts; \
     echo -e '[defaults]\nretry_files_enabled = False' > /etc/ansible/ansible.cfg

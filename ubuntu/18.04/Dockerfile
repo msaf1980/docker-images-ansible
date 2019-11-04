@@ -20,8 +20,9 @@ RUN \
       systemd-logind.service getty.service getty.target; \
     apt-get install -y software-properties-common git iproute2; \
     apt-add-repository -y ppa:ansible/ansible; \
-    apt-get install -y ansible python-netaddr; \
+    apt-get install -y ansible python-netaddr python-pip; \
     apt-get clean; \
+    pip install yamllint; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*; \
     printf "[local]\nlocalhost ansible_connection=local\n" > /etc/ansible/hosts; \
     printf "[defaults]\nretry_files_enabled = False\nstdout_callback = yaml\n" > /etc/ansible/ansible.cfg

@@ -18,7 +18,7 @@ RUN \
       systemd-logind.service getty.service getty.target; \
     apt-get update; \
     apt-get install -y --no-install-recommends sudo build-essential libffi-dev libssl-dev python-dev python-pip python-netaddr; \
-    pip install --upgrade pip setuptools; \
+    pip install --upgrade pip setuptools yamllint ansible-lint; \
     rm -rf /var/lib/apt/lists/*; \
     rm -Rf /usr/share/doc && rm -Rf /usr/share/man; \
     apt-get clean;

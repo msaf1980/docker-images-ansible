@@ -17,8 +17,9 @@ RUN dnf -y install systemd; \
       sys-kernel-debug.mount sys-fs-fuse-connections.mount \
       systemd-logind.service getty.service getty.target; \
     dnf -y upgrade; \
-    dnf -y install git ansible sudo libselinux-python iproute python2-dnf python-netaddr procps-ng; \
+    dnf -y install git ansible sudo libselinux-python iproute python2-dnf python-netaddr procps-ng python-pip; \
     dnf clean all; \
+    pip install yamllint ansible-lint; \
     sed -i -e 's/^\(Defaults\s*requiretty\)/#--- \1/'  /etc/sudoers; \
     echo -e '[local]\nlocalhost ansible_connection=local' > /etc/ansible/hosts; \
     echo -e '[defaults]\nretry_files_enabled = False' > /etc/ansible/ansible.cfg
